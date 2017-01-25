@@ -1,8 +1,5 @@
-STDIN.read.split("\n").split("")
-   puts a
-end
-
-
+text = STDIN.gets.gsub(/\n/,"")
+pattern = STDIN.gets.gsub(/\n/,"")
 
 def KMP(text, pattern)
   i = 0
@@ -24,7 +21,6 @@ def KMP(text, pattern)
 
     # a match is found
     if j == pattern_length
-      puts "found substring at index: #{i - pattern_length}"
       count += 1
       j = prefix[j]
     end
@@ -40,19 +36,21 @@ def prefix_table(pattern)
 
   prefix = Array.new(m + 1)
 
-    prefix[i] = j;
-    while i < m
-      while j >= 0 && pattern[i] != pattern[j]
-        j = prefix[j]
-      end
-
-      i += 1
-      j += 1
-      prefix[i] = j
+  prefix[i] = j;
+  while i < m
+    while j >= 0 && pattern[i] != pattern[j]
+      j = prefix[j]
     end
+
+    i += 1
+    j += 1
+    prefix[i] = j
+  end
 
   prefix
 end
+
+puts KMP(text, pattern)
 
 
 
